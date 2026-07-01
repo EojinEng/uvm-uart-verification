@@ -1,0 +1,21 @@
+# Synopsys/VCS
+simv
+simv.daidir/
+simv.vdb/
+csrc/
+ucli.key
+*.log
+*.vpd
+*.fsdb
+*.key
+DVEfiles/
+
+# Coverage
+*.vdb
+
+# Temporary
+*.tmp
+*.bak
+
+# Editor
+*.swp
