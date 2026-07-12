@@ -1,17 +1,15 @@
 `include "uvm_macros.svh"
+`include "uart_interface.sv"
 import uvm_pkg::*;
-import uart_pkg::*;
-
-`include "uart_if.sv"
 
 module uart_tb ();
 
     logic clk;
-    logic rstn;
+    logic reset;
 
     uart_if u_if (
         .clk (clk),
-        .rstn(rstn)
+        .reset(reset)
     );
 
     uart_top #(
@@ -29,13 +27,15 @@ module uart_tb ();
         .rx_done (u_if.rx_done)
     );
 
+    assign u_if.rx = u_if.tx;    
+
     initial clk = 0;
     always #5 clk = ~clk;
 
     initial begin
-        rstn = 0;
+        reset = 1;
         repeat (5) @(posedge clk);
-        rstn = 1;
+        reset = 0;
     end
 
     initial begin
@@ -49,7 +49,6 @@ module uart_tb ();
     end
 
 endmodule
-
 
 
 

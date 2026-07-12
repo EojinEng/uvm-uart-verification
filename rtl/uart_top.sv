@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module uart_top #(
     parameter BAUD_RATE = 9600
 ) (
@@ -20,7 +22,7 @@ module uart_top #(
 
     baud_tick #(
         .BAUD_RATE(BAUD_RATE)
-    ) u_brg (
+    ) u_baud_tick (
         .clk  (clk),
         .reset(reset),
         .tick (tick)

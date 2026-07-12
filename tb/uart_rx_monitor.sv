@@ -1,11 +1,14 @@
 `ifndef UART_RX_MONITOR_SV
 `define UART_RX_MONITOR_SV
+import uvm_pkg::*;
+`include "uvm_macros.svh"
 
 class uart_rx_monitor extends uvm_monitor;
+
     `uvm_component_utils(uart_rx_monitor)
 
     virtual uart_if u_if;
-    uvm_analysis_port #(uart_sequence_item) ap;
+    uvm_analysis_port #(uart_rx_sequence_item) ap;
 
     function new(string name, uvm_component parent);
         super.new(name, parent);
@@ -30,15 +33,16 @@ class uart_rx_monitor extends uvm_monitor;
     endtask  //run_phase
 
     task collect_transaction();
-        uart_sequence_item mon_rx_item;
-        @(posedge u_if.rx_mon_cb.rx_done);
-        mon_rx_item = uart_sequence_item::type_id::create("mon_rx_item");
-        mon_rx_item.rx_data = u_if.rx_mon_cb.rx_data;
-        `uvm_info(get_type_name(), $sformatf("mon rx: %s",
-                                             mon_rx_item.convert2string()),
-                  UVM_MEDIUM)
+        uart_rx_sequence_item mon_rx_item;
+        mon_rx_item = uart_rx_sequence_item::type_id::create("mon_rx_item");
+
+        @(posedge u_if.rx_done);
+        mon_rx_item.rx_data = u_if.mon_cb.rx_data;
         ap.write(mon_rx_item);
-        @(u_if.rx_mon_cb);
+
+        `uvm_info(get_type_name(), $sformatf("mon rx data = %0h",
+                                             mon_rx_item.rx_data), UVM_MEDIUM)
+        @(u_if.mon_cb);
     endtask  //collect_transaction
 
     virtual function void report_phase(uvm_phase phase);

@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module baud_tick #(
     parameter int BAUD_RATE = 9600
 ) (

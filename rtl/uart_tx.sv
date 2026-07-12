@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module uart_tx (
     input  logic       clk,
     input  logic       reset,
@@ -9,6 +11,10 @@ module uart_tx (
     output logic       tx_done
 );
 
+    logic [3:0] tick_cnt;
+    logic [2:0] bit_cnt;
+    logic [7:0] shift_reg;
+
     typedef enum logic [1:0] {
         IDLE  = 2'b00,
         START,
@@ -17,10 +23,6 @@ module uart_tx (
     } tx_state_e;
 
     tx_state_e state;
-
-    logic [3:0] tick_cnt;
-    logic [2:0] bit_cnt;
-    logic [7:0] shift_reg;
 
     always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -32,12 +34,10 @@ module uart_tx (
             tx_busy   <= '0;
             tx_done   <= '0;
         end else begin
+            tx_done <= 1'b0;
             case (state)
-               
-               IDLE: begin
-                    tx      <= 1'b1;
-                    tx_busy <= 1'b0;
-                    tx_done <= 1'b0;
+                IDLE: begin
+                    tx <= 1'b1;
                     if (tx_start) begin
                         shift_reg <= tx_data;
                         tick_cnt  <= '0;
@@ -98,6 +98,4 @@ module uart_tx (
             endcase
         end
     end
-
-
 endmodule
