@@ -42,7 +42,7 @@ Functional Coverage를 통해 다양한 데이터 패턴에 대한 검증을 수
 
 # UVM Verification Architecture
 
-<img width="1215" height="1071" alt="image" src="https://github.com/user-attachments/assets/a82b345d-f217-4fa2-9506-1862334df7a5" />
+<img width="769" height="672" alt="image" src="https://github.com/user-attachments/assets/079c2578-3e77-425d-a58c-dc2e48ca5f69" />
 
 - uart_Test
 - uart_Environment
