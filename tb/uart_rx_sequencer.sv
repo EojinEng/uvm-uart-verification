@@ -1,15 +1,13 @@
-`ifndef COMPONENT_SV
-`define COMPONENT_SV
-import uvm_pkg::*;
-`include "uvm_macros.svh"
-
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
-class component extends uvm_component;
-    `uvm_component_utils(component)
+`ifndef UART_RX_SEQUENCER_SV
+`define UART_RX_SEQUENCER_SV
 
-    function new(string name, uvm_component parent);
+class uart_rx_sequencer extends uvm_sequencer #(uart_rx_sequence_item);
+    `uvm_component_utils(uart_rx_sequencer)
+
+    function new(string name="uart_rx_sequencer", uvm_component parent);
         super.new(name, parent);
     endfunction  //new()
 
@@ -18,6 +16,7 @@ class component extends uvm_component;
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);
+        super.connect_phase(phase);
     endfunction
 
     virtual task run_phase(uvm_phase phase);

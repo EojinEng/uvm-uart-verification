@@ -1,13 +1,13 @@
-`ifndef UART_TX_MONITOR_SV
-`define UART_TX_MONITOR_SV
 import uvm_pkg::*;
 `include "uvm_macros.svh"
+`ifndef UART_TX_OUT_MONITOR_SV
+`define UART_TX_OUT_MONITOR_SV
 
-class uart_tx_monitor extends uvm_monitor;
+class uart_tx_out_monitor extends uvm_monitor;
 
-    `uvm_component_utils(uart_tx_monitor)
+    `uvm_component_utils(uart_tx_out_monitor)
 
-    function new(string name, uvm_component parent);
+    function new(string name="uart_tx_out_monitor", uvm_component parent);
         super.new(name, parent);
     endfunction  //new()
 
@@ -17,12 +17,13 @@ class uart_tx_monitor extends uvm_monitor;
     int baud_rate;
     int clks_per_bit;
 
-    uvm_analysis_port #(uart_tx_sequence_item) ap;
+    //scoreboard imp로 쏴줄 port
+    uvm_analysis_port #(uart_tx_sequence_item) ap_out_mon;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
-        ap = new("ap", this);
+        ap_out_mon = new("ap_out_mon", this);
 
         if (!uvm_config_db#(virtual uart_if)::get(this, "", "u_if", u_if))
             `uvm_fatal(get_type_name(),
@@ -49,25 +50,26 @@ class uart_tx_monitor extends uvm_monitor;
     endtask  //run_phase
 
     task collect_transaction();
-        uart_tx_sequence_item mon_tx_item;
-        mon_tx_item = uart_tx_sequence_item::type_id::create("mon_tx_item");
+        uart_tx_sequence_item mon_tx_out_item;
+        mon_tx_out_item = uart_tx_sequence_item::type_id::create("mon_tx_out_item");
+
         // START : uart_tx = 1->0으로 될 때
         wait (u_if.mon_cb.tx === 0);
 
         repeat (clks_per_bit + (clks_per_bit / 2)) @(u_if.mon_cb);
 
         for (int i = 0; i < 8; i++) begin
-            mon_tx_item.tx_data[i] = u_if.mon_cb.tx;
+            mon_tx_out_item.tx_data[i] = u_if.mon_cb.tx;
             `uvm_info(get_type_name(), $sformatf(
-                      "Sampling Bit[%0d] = %b", i, mon_tx_item.tx_data[i]),
+                      "Sampling Bit[%0d] = %b", i, mon_tx_out_item.tx_data[i]),
                       UVM_HIGH)
             repeat (clks_per_bit) @(u_if.mon_cb);
         end
 
         @(posedge u_if.mon_cb.tx_done);
-        ap.write(mon_tx_item);
+        ap_out_mon.write(mon_tx_out_item);
         `uvm_info(get_type_name(), $sformatf("mon tx data = %0h",
-                                             mon_tx_item.tx_data), UVM_HIGH)
+                                             mon_tx_out_item.tx_data), UVM_HIGH)
         @(u_if.mon_cb);
     endtask  //collect_transaction
 

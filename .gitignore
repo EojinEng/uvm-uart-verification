@@ -1,21 +1,31 @@
-# Synopsys/VCS
+# 1. VCS Compiled Executables & Dirs (실행 파일 및 빌드 폴더)
 simv
-simv.daidir/
-simv.vdb/
+simv*
 csrc/
-ucli.key
-*.log
-*.vpd
-*.fsdb
-*.key
-DVEfiles/
+simv.daidir/
 
-# Coverage
+# 2. Coverage & Logs (커버리지 및 각종 로그 파일)
 *.vdb
+coverage.vdb/
+simv.vdb/
+*.log
+cm.log
+tr_db.log
+result.log
 
-# Temporary
-*.tmp
-*.bak
+# 3. Waveforms (파형 데이터 - 용량 폭탄의 주범!)
+*.vcd
+*.fsdb
+frame_test.vcd
 
-# Editor
-*.swp
+# 4. Verdi & GUI Config Files (Verdi 실행 찌꺼기)
+verdiLog/
+novas.*
+*.rc
+*.conf
+.*.xml
+
+# 5. Misc Auto-generated (기타 잡동사니)
+ucli.key
+vc_hdrs.h
+.history/

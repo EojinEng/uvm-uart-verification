@@ -2,7 +2,7 @@ Magic 271485
 Revision Verdi_W-2024.09-SP2
 
 ; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
-viewPort 0 25 2560 1271 277 207
+viewPort 0 25 2560 561 185 206
 
 ; File list:
 ; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
@@ -16,7 +16,7 @@ signalSpacing 5
 
 ; windowTimeUnit is used for zoom, cursor & marker
 ; waveform viewport range
-zoom 989531281.091141 989804806.092079
+zoom 0.000000 47616419706.140465
 cursor 0.000000
 marker 0.000000
 
@@ -25,7 +25,7 @@ marker 0.000000
 ; visible top row signal index
 top 0
 ; marker line index
-markerPos 13
+markerPos 0
 
 ; event list
 ; addEvent event_name event_expression
@@ -42,45 +42,11 @@ COMPLEX_EVENT_END
 
 ; toolbar current search type
 ; curSTATUS search_type
-curSTATUS ByFalling
+curSTATUS ByChange
 
 
 addGroup "G1"
-activeDirFile "" "/home/hedu11/eojin/uart_uvm/novas.fsdb"
-addSignal -h 15 /uart_tb/u_if/clk
-addSignal -h 15 -holdScope reset
-addSignal -h 15 -UNSIGNED -HEX -holdScope tx_data[7:0]
-addSignal -h 15 -holdScope tx_start
-addSignal -h 15 -holdScope tx_busy
-addSignal -h 15 -holdScope tx_done
-addSignal -h 15 -holdScope tx
-addSignal -h 15 -holdScope rx
-addSignal -h 15 -UNSIGNED -HEX -holdScope rx_data[7:0]
-addSignal -h 15 -holdScope rx_done
-addGroup "G2"
-addSignal -h 15 -UNSIGNED -HEX /uart_tb/u_if/mon_cb/tx_data[7:0]
-addSignal -h 15 -UNSIGNED -HEX -holdScope rx_data[7:0]
-addGroup "G3"
 
 ; getSignalForm Scope Hierarchy Status
 ; active file of getSignalForm
-activeDirFile "" "/home/hedu11/eojin/uart_uvm/novas.fsdb"
-
-GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
-getSignalForm close
-
-"/uart_tb"
-"/uart_tb/u_if"
-
-SCOPE_LIST_BEGIN
-"/uart_tb"
-"/uart_tb/u_if"
-"/uart_tb/dut"
-"/uart_tb/u_if/mon_cb"
-"/uart_tb/u_if/rx_drv_cb"
-"/uart_tb/u_if/tx_drv_cb"
-SCOPE_LIST_END
-
-GETSIGNALFORM_SCOPE_HIERARCHY_END
-
 

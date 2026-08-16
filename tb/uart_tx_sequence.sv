@@ -1,7 +1,7 @@
-`ifndef UART_TX_SEQUENCE_SV
-`define UART_TX_SEQUENCE_SV
 import uvm_pkg::*;
 `include "uvm_macros.svh"
+`ifndef UART_TX_SEQUENCE_SV
+`define UART_TX_SEQUENCE_SV
 
 class uart_base_sequence extends uvm_sequence #(uart_tx_sequence_item);
 
@@ -29,7 +29,7 @@ class uart_random_seq extends uart_base_sequence;
         super.new(name);
     endfunction
 
-    int repeat_num = 100;
+    int repeat_num = 500;
 
     virtual task body();
 
@@ -51,7 +51,7 @@ endclass
 class uart_pattern_seq extends uart_base_sequence;
 
     `uvm_object_utils(uart_pattern_seq)
-    
+
     function new(string name = "uart_pattern_seq");
         super.new(name);
     endfunction

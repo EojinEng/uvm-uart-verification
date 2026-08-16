@@ -27,14 +27,14 @@ fdb_tool =
 [hb]
 postSimFile = /home/hedu11/eojin/uart_uvm/novas.fsdb
 syncTime = 0
-viewport = 8 31 2560 1369 0 0 837 2558
-activeNode = "uart_tb"
-activeScope = "uart_tb"
-activeFile = "./tb/uart_tb.sv"
+viewport = 0 23 2560 1369 0 0 290 2558
+activeNode = "uart_top"
+activeScope = "uart_top"
+activeFile = "./rtl/uart_top.sv"
 interactiveMode = False
 viewType = Source
 simulatorMode = False
-sourceBeginLine = 4
+sourceBeginLine = 2
 baMode = False
 srcLineNum = True
 AutoWrap = True
@@ -51,23 +51,23 @@ DnDtraceCrossHierOnly = True
 leadingZero = False
 signalPane = False
 SourceVerticalScrollLines = 5
-Scope1 = "uart_tb"
-multipleSelection = 1 4 2 0 0
+Scope1 = "uart_top"
+multipleSelection = 1 2 2 0 0
 sdfCheckUndef = FALSE
 simFlow = FALSE
 [hb.design]
 importCmd = "-covdir" "coverage.vdb" "-dbdir" "simv.daidir" 
 invokeDir = /home/hedu11/eojin/uart_uvm
 [hb.sourceTab.1]
-scope = uart_tb
-File = /home/hedu11/eojin/uart_uvm/tb/uart_tb.sv
-Line = 5
+scope = uart_top
+File = /home/hedu11/eojin/uart_uvm/rtl/uart_top.sv
+Line = 3
 [nMemoryManager]
 WaveformFile = /home/hedu11/eojin/uart_uvm/novas.fsdb
 UserActionNum = 0
 nMemWindowNum = 0
 [wave.0]
-viewPort = 0 25 2560 1271 277 207
+viewPort = 0 25 2560 561 185 206
 primaryWindow = TRUE
 SessionFile = /home/hedu11/eojin/uart_uvm/verdiLog/novas_autosave.ses.wave.0
 displayGrid = FALSE

@@ -1,4 +1,4 @@
-TC ?= uart_test
+TC ?= uart_rx_test
 SEED ?= 1234
 
 VCS_OPTS := -full64 -sverilog 
@@ -20,7 +20,7 @@ VERDI_OPTS := -covdir coverage.vdb -dbdir simv.daidir -ssf novas.fsdb
 .PHONY: compile sim clean urg
 
 compile:
-	vcs $(VCS_OPTS) -f filelist.f -o simv
+	vcs $(VCS_OPTS) -f rx_filelist.f -o simv
 
 sim: compile
 	./simv $(SIM_OPTS)
@@ -32,7 +32,8 @@ vw:
 	verdi -dbdir simv.daidir -ssf novas.fsdb &
 
 vc:
-	verdi -cov codir coverage.vdb & 
+	verdi -cov -covdir coverage.vdb
+
 
 clean:
 	rm -rf simv* csrc *.key *.h *.log *.fsdb.* novas* *.conf *LOG coverage.vdb urgReport

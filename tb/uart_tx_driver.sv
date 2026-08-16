@@ -1,27 +1,23 @@
-`ifndef UART_TX_DRIVER_SV
-`define UART_TX_DRIVER_SV
 import uvm_pkg::*;
 `include "uvm_macros.svh"
+`ifndef UART_TX_DRIVER_SV
+`define UART_TX_DRIVER_SV
 
 class uart_tx_driver extends uvm_driver #(uart_tx_sequence_item);
 
     //항상 UVM 등록 먼저
     `uvm_component_utils(uart_tx_driver)
 
-    //가상 인터페이스 연결
-    virtual uart_if u_if;
-
-    //expected tx를 위한 포트 (driver -> scoreboard)
-    uvm_analysis_port #(uart_tx_sequence_item) ap;
-
     //new()함수 정의
     function new(string name, uvm_component parent);
         super.new(name, parent);
     endfunction  //new()
 
+    //가상 인터페이스 연결
+    virtual uart_if u_if;
+
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        ap = new("ap", this);
         if (!uvm_config_db#(virtual uart_if)::get(this, "", "u_if", u_if)) begin
             `uvm_fatal(get_type_name(),
                        "driver에서 uvm_config_db 에러 발생.");
@@ -41,7 +37,6 @@ class uart_tx_driver extends uvm_driver #(uart_tx_sequence_item);
         forever begin
             uart_tx_sequence_item item;
             seq_item_port.get_next_item(item);
-            ap.write(item);
             drive_tx(item);
             seq_item_port.item_done();
         end
