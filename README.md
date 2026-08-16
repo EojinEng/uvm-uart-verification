@@ -1,6 +1,7 @@
 # UART RTL Design & UVM Verification
 
-> **SystemVerilog를 이용하여 UART RTL을 설계하고, UVM 환경에서 Loopback 기반 기능 검증을 수행한 프로젝트입니다.**
+> **SystemVerilog를 UVM 환경 기반 기능 검증을 수행한 프로젝트입니다.
+> TX/RX Agent 및 Env를 독립적으로 구현함으로써, 다른 시스템에서도 UART 검증이 가능하도록 재사용성을 높인 구조입니다.**
 
 ---
 
