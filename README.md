@@ -1,7 +1,8 @@
 # UART RTL Design & UVM Verification
 
 > **SystemVerilog를 UVM 환경 기반 기능 검증을 수행한 프로젝트입니다.
-> TX/RX Agent 및 Env를 독립적으로 구현함으로써, 다른 시스템에서도 UART 검증이 가능하도록 재사용성을 높인 구조입니다.**
+> TX/RX Agent 및 Env를 독립적으로 구현함으로써,
+> 향후 다른 시스템 레벨 환경에서도 별도의 수정 없이 즉각적으로 통합 및 재사용할 수 있도록 검증 Architecture를 최적화했습니다.**
 
 ---
 
