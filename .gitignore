@@ -29,3 +29,13 @@ novas.*
 ucli.key
 vc_hdrs.h
 .history/
+
+# EDA Tool Logs & Auto-generated files
+vdCovLog/
+verdiLog/
+vc_hdrs.h
+*.xml
+
+# Editor Temporary files
+*.swp
+*.swo
